@@ -1,0 +1,297 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+
+    background-image: url("/static/newbackcandi.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+
+    color: #2c3e50;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    width: 100%;
+    height: 100%;
+
+    background: rgba(255, 255, 255, 0.25); /* reduce from 0.4 → 0.25 */
+
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+/* Container */
+.main-container {
+    width: 92%;
+    margin: auto;
+    padding: 20px 0;
+}
+
+/* Title */
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 34px;
+    font-weight: 700;
+
+    color: #ffffff;  /* pure white */
+
+    text-shadow: 0 2px 8px rgba(0,0,0,0.5); /* makes it readable on background */
+}
+/* Upload Section */
+.upload-section {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    padding: 18px;
+
+    border-radius: 15px;
+
+    backdrop-filter: blur(15px);
+    background: rgba(255,255,255,0.6);
+    border-left: 6px solid #6a11cb;
+    background: rgba(255,255,255,0.8);
+
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    margin-bottom: 25px;
+}
+
+.upload-section:hover {
+    transform: scale(1.01);
+}
+
+textarea {
+    width: 380px;
+    height: 60px;
+
+    border-radius: 12px;
+    padding: 10px;
+
+    border: 1px solid rgba(255,255,255,0.4);
+    background: rgba(255,255,255,0.8);
+
+    outline: none;
+}
+
+textarea:focus {
+    border-color: #00b4ff;
+    box-shadow: 0 0 8px rgba(0,180,255,0.5);
+}
+
+
+button {
+    padding: 10px 25px;
+    border-radius: 10px;
+    border: none;
+
+    background: linear-gradient(45deg,#6a11cb,#2575fc);
+    color: white;
+
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+/* Dashboard Grid */
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-bottom: 18px;
+}
+
+/* Cards */
+.card {
+    padding: 18px;
+    border-radius: 15px;
+
+    backdrop-filter: blur(12px);
+    background: rgba(255,255,255,0.8);
+
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+
+    transition: 0.3s;
+}
+
+.card {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card:hover {
+    transform: translateY(-6px);
+}
+
+/* Specific Cards */
+
+.score-card {
+    text-align: center;
+    border-left: 6px solid #2196f3;
+}
+
+.details {
+    border-left: 6px solid #673ab7;
+}
+
+.tips {
+    border-left: 6px solid #2e7d32;
+}
+
+.matched {
+    border-left: 6px solid #00c853;
+}
+
+.missing {
+    border-left: 6px solid #ff1744;
+}
+
+.roadmap {
+    border-left: 6px solid #ff9800;
+}
+
+.circle {
+    width: 160px;
+    height: 160px;
+    margin: auto;
+    border-radius: 50%;
+    
+    box-shadow: 0 0 20px rgba(0, 150, 255, 0.4);
+
+    background: conic-gradient(
+        #ff0000,
+        #ff7f00,
+        #ffff00,
+        #00ff00,
+        #0000ff,
+        #4b0082,
+        #8f00ff,
+        #ff0000
+    );
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+
+
+.circle::before {
+    content: "";
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    background: white;
+    border-radius: 50%;
+}
+
+.circle span {
+    position: relative;
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.fit-label {
+    font-size: 18px;
+    margin-top: 10px;
+    color: #2575fc;
+}
+
+/* Tags */
+.tag {
+    display: inline-block;
+    padding: 6px 12px;
+    margin: 5px;
+    border-radius: 20px;
+    font-size: 13px;
+}
+
+.green {
+    background: linear-gradient(45deg,#00c853,#69f0ae);
+    color: white;
+}
+
+.red {
+    background: linear-gradient(45deg,#ff5252,#d50000);
+    color: white;
+}
+
+/* Lists */
+ul {
+    padding-left: 18px;
+}
+
+li {
+    margin-bottom: 6px;
+}
+
+/* Home Button */
+.home-btn {
+    position: fixed;
+    top: 20px;
+    left: 60px;
+
+    padding: 8px 18px;
+    border-radius: 25px;
+
+    text-decoration: none;
+    font-weight: bold;
+    color: white;
+
+    background: linear-gradient(45deg,#00b4ff,#007cf0);
+
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.home-btn:hover {
+    transform: scale(1.05);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .dashboard {
+        grid-template-columns: 1fr;
+    }
+}
+
+.fit-label {
+    font-size: 20px;
+    margin-top: 10px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.fit-label {
+/* ✅ Good Fit */
+.fit-label:contains("Good") {
+    color: #00c853;
+}
+
+/* ⚠️ Average Fit */
+.fit-label:contains("Average") {
+    color: #ff9800;
+}
+
+/* ❌ Poor Fit */
+.fit-label:contains("Poor") {
+    color: #ff1744;
+}
+
+}
