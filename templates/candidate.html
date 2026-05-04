@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>AI Career Analyzer</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='candidate.css') }}">
+</head>
+
+<body>
+
+<a href="/" class="home-btn">🏠 Home</a>
+
+<div class="main-container">
+
+<h1>🚀 AI Career Fit Analyzer For Candidates</h1>
+
+<form method="POST" enctype="multipart/form-data" class="upload-section">
+
+<input type="file" name="resume" required>
+
+<textarea name="jd" placeholder="Paste Job Description"></textarea>
+
+<button>Analyze</button>
+
+</form>
+
+{% if overall %}
+
+<!-- TOP DASHBOARD -->
+<div class="dashboard">
+
+<div class="card score-card">
+<h3>📊 Match Score</h3>
+
+<div class="circle">
+<span>{{overall}}%</span>
+
+</div>
+
+<p class="fit-label">{{label}}</p>
+
+</div>
+
+
+<div class="card details">
+<h3>👤 Candidate</h3>
+
+<p><b>Name:</b> {{details.name}}</p>
+<p><b>Email:</b> {{details.email}}</p>
+<p><b>Phone:</b> {{details.phone}}</p>
+<p><b>Education:</b> {{details.education}}</p>
+<p><b>Experience:</b> {{details.experience}}</p>
+
+</div>
+
+
+<div class="card tips">
+<h3>💡 Resume Tips</h3>
+
+<ul>
+{% for line in tips.split("•") %}
+    {% if line.strip() %}
+        <li>{{ line }}</li>
+    {% endif %}
+{% endfor %}
+</ul>
+
+</div>
+
+</div>
+
+
+<!-- SECOND ROW -->
+<div class="dashboard">
+
+<div class="card matched">
+<h3>✅ Matched Skills</h3>
+
+{% for skill in matched %}
+<span class="tag green">{{skill}}</span>
+{% endfor %}
+
+</div>
+
+
+<div class="card missing">
+<h3>❌ Missing Skills</h3>
+
+{% for skill in missing %}
+<span class="tag red">{{skill}}</span>
+{% endfor %}
+
+</div>
+
+
+<div class="card roadmap">
+<h3>🚀 Career Roadmap</h3>
+
+<ul>
+{% for line in roadmap.split("\n") %}
+    {% if line.strip() %}
+        <li>{{ line }}</li>
+    {% endif %}
+{% endfor %}
+</ul>
+
+</div>
+
+</div>
+
+{% endif %}
+
+</div>
+
+</body>
+</html>
