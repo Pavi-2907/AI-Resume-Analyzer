@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Resume IQ ATS Analyzer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='recruiter.css') }}">
+</head>
+<body>
+
+<a href="/" class="home-btn">🏠 Home</a>
+
+<div class="main-container">
+
+    <h1 class="title">🚀 AI Resume Analyzer For Recruiters</h1>
+
+    <!-- Upload Section -->
+    <form class="upload-section" method="POST" action="/recruiter" enctype="multipart/form-data">
+        <input type="file" name="resume">
+        <textarea name="jd" placeholder="Paste Job Description here..."></textarea>
+        <button type="submit">Analyze Match</button>
+    </form>
+
+    {% if overall %}
+
+    <div class="dashboard">
+
+        <!-- Candidate Details -->
+        <div class="card details">
+            <h3>👤 Candidate Details</h3>
+
+            <p><strong>Name :</strong> {{ details.name }}</p>
+            <p><strong>Email :</strong> {{ details.email }}</p>
+            <p><strong>Mobile :</strong> {{ details.phone }}</p>
+
+            <p><strong>Education :</strong>
+                {{ details.education if details.education != "Not Found" else "Not Mentioned" }}
+            </p>
+
+            <p><strong>Experience :</strong>
+                {% if details.experience == "Fresher" %}
+                    <span class="fresher">Fresher</span>
+                {% else %}
+                    {{ details.experience }}
+                {% endif %}
+            </p>
+        </div>
+
+        <!-- Score -->
+        <div class="card circle-card">
+            <div class="circle">
+                <span>{{ overall }}%</span>
+            </div>
+
+            <p class="fit-label">
+                {% if overall >= 80 %}
+                    <span class="good">✔ Good Fit</span>
+                {% elif overall >= 60 %}
+                    <span class="average">⚠ Average Fit</span>
+                {% else %}
+                    <span class="poor">✖ Poor Fit</span>
+                {% endif %}
+            </p>
+        </div>
+
+        <!-- Breakdown -->
+        <div class="card breakdown">
+            <h3>📊 Breakdown</h3>
+
+            <p>Skills {{ skill_percent }}%</p>
+            <div class="bar"><div style="width:{{ skill_percent }}%"></div></div>
+
+            <p>Education {{ education }}%</p>
+            <div class="bar"><div style="width:{{ education }}%"></div></div>
+
+            <p>Experience {{ experience }}%</p>
+            <div class="bar"><div style="width:{{ experience }}%"></div></div>
+        </div>
+
+        <!-- AI Summary -->
+        <div class="card ai-summary">
+            <h3>🤖 AI Insights</h3>
+            <ul>
+                {% for line in summary.split("•") %}
+                    {% if line.strip() %}
+                        <li>{{ line }}</li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- Matched Skills -->
+        <div class="card skills match">
+            <h3>✅ Matched Skills</h3>
+            {% for skill in matched %}
+                <span class="tag green">{{ skill }}</span>
+            {% endfor %}
+        </div>
+
+        <!-- Missing Skills -->
+        <div class="card skills missing">
+            <h3>❌ Missing Skills</h3>
+            {% for skill in missing %}
+                <span class="tag red">{{ skill }}</span>
+            {% endfor %}
+        </div>
+
+    </div>
+
+    <!-- Download -->
+    <div class="download-section">
+        <a href="/download_questions" class="download-btn">
+            📄 Download Interview Questions
+        </a>
+    </div>
+
+    {% endif %}
+
+</div>
+
+</body>
+</html>
